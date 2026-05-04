@@ -1,7 +1,7 @@
 Package: scFastDE
 Type: Package
 Title: Fast Donor-Weighted Pseudo-Bulk Differential Expression for scRNA-seq
-Version: 0.99.0
+Version: 0.99.1
 Authors@R: c(
     person("Subhadip", "Jana", role = c("aut", "cre"),
            email = "subhadipjana1409@gmail.com",
@@ -27,7 +27,7 @@ biocViews: SingleCell, DifferentialExpression, StatisticalMethod,
            CellBasedAssays, WorkflowStep
 Encoding: UTF-8
 Depends:
-    R (>= 4.5.0)
+    R (>= 4.6.0)
 Imports:
     SingleCellExperiment,
     SummarizedExperiment,
