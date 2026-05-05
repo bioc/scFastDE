@@ -1,3 +1,10 @@
+# scFastDE 0.99.1
+
+## Bug fixes
+
+* Removed `inst/CITATION` file lacking a DOI (Bioconductor BiocCheck WARNING).
+* Updated R version dependency from 4.5.0 to 4.6.0 to match Bioconductor 3.23.
+
 # scFastDE 0.99.0
 
 ## New features
