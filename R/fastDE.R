@@ -95,8 +95,7 @@
 #' @seealso \code{\link{fastPseudobulk}}, \code{\link{filterSparseDonors}},
 #'   \code{\link{plotDEResults}}
 #'
-#' @importFrom limma voom lmFit makeContrasts contrasts.fit eBayes
-#'   topTable
+#' @importFrom limma voom lmFit makeContrasts contrasts.fit eBayes topTable
 #' @importFrom SummarizedExperiment colData
 #' @importFrom S4Vectors DataFrame
 #' @importFrom BiocParallel SerialParam

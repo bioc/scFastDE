@@ -1,3 +1,9 @@
+# scFastDE 0.99.2
+
+## Bug fixes
+
+* Improve overall stability.
+
 # scFastDE 0.99.1
 
 ## Bug fixes

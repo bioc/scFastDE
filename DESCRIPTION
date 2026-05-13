@@ -1,7 +1,7 @@
 Package: scFastDE
 Type: Package
 Title: Fast Donor-Weighted Pseudo-Bulk Differential Expression for scRNA-seq
-Version: 0.99.1
+Version: 0.99.2
 Authors@R: c(
     person("Subhadip", "Jana", role = c("aut", "cre"),
            email = "subhadipjana1409@gmail.com",
@@ -47,5 +47,5 @@ Suggests:
     scuttle,
     withr
 VignetteBuilder: knitr
-RoxygenNote: 7.3.3
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0

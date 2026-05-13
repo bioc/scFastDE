@@ -61,4 +61,9 @@ Useful links:
 \author{
 \strong{Maintainer}: Subhadip Jana \email{subhadipjana1409@gmail.com} (\href{https://orcid.org/0009-0003-7860-2853}{ORCID})
 
+Authors:
+\itemize{
+  \item Subhadip Jana \email{subhadipjana1409@gmail.com} (\href{https://orcid.org/0009-0003-7860-2853}{ORCID})
+}
+
 }

@@ -44,9 +44,7 @@
 #'
 #' @seealso \code{\link{fastDE}}, \code{\link{FDEResult}}
 #'
-#' @importFrom ggplot2 ggplot aes geom_point geom_vline geom_hline
-#'   scale_color_manual labs theme_bw theme element_text element_blank
-#'   element_rect element_line geom_text
+#' @importFrom ggplot2 ggplot aes geom_point geom_vline geom_hline scale_color_manual labs theme_bw theme element_text element_blank element_rect element_line geom_text
 #' @importFrom methods is
 #' @importFrom utils head
 #' @export
