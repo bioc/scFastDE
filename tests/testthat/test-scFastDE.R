@@ -268,7 +268,7 @@ test_that("fastDE detects paired design automatically", {
                   condition = "condition", target_type = "Tcell",
                   min_cells = 5)
     testthat::expect_s4_class(res, "FDEResult")
-    testthat::expect_true(res@params$is_paired)
+    testthat::expect_true(params(res)$is_paired)
     # Should produce 12 samples (6 donors x 2 conditions)
     testthat::expect_equal(ncol(pseudobulk(res)), 12)
 })
@@ -291,10 +291,9 @@ test_that("unpaired design still works after paired fix", {
                   condition = "condition", target_type = "Tcell",
                   min_cells = 5)
     testthat::expect_s4_class(res, "FDEResult")
-    testthat::expect_false(res@params$is_paired)
+    testthat::expect_false(params(res)$is_paired)
     dt <- as.data.frame(deTable(res))
     sig_genes <- rownames(dt)[dt$adj.P.Val < 0.05]
     detected <- intersect(sig_genes, paste0("Gene", 1:10))
     testthat::expect_gt(length(detected), 0)
 })
-

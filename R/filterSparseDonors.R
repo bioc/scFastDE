@@ -65,12 +65,7 @@ filterSparseDonors <- function(sce,
                                 action    = c("remove", "flag")) {
     action <- match.arg(action)
 
-    if (!is(sce, "SingleCellExperiment"))
-        stop("'sce' must be a SingleCellExperiment object.")
-    if (is.null(donor) || !donor %in% names(colData(sce)))
-        stop("'donor' column '", donor, "' not found in colData(sce).")
-    if (is.null(cell_type) || !cell_type %in% names(colData(sce)))
-        stop("'cell_type' column '", cell_type, "' not found in colData(sce).")
+    .validate_sce_coldata(sce, list(donor = donor, cell_type = cell_type))
     if (!is.numeric(min_cells) || min_cells < 1)
         stop("'min_cells' must be a positive integer.")
 

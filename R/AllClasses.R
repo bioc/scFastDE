@@ -138,6 +138,8 @@ setGeneric("pseudobulk", function(x, ...) standardGeneric("pseudobulk"))
 #' @export
 setGeneric("donorWeights", function(x, ...) standardGeneric("donorWeights"))
 
+
+
 # ── Methods ───────────────────────────────────────────────────────────────────
 
 #' @title Show method for FDEResult
@@ -151,16 +153,20 @@ setGeneric("donorWeights", function(x, ...) standardGeneric("donorWeights"))
 #' @importFrom methods show
 #' @export
 setMethod("show", "FDEResult", function(object) {
-    sig <- sum(object@deTable[["adj.P.Val"]] < 0.05, na.rm = TRUE)
-    is_paired <- isTRUE(object@params$is_paired)
+    dt <- deTable(object)
+    pb <- pseudobulk(object)
+    object_params <- params(object)
+
+    sig <- sum(dt[["adj.P.Val"]] < 0.05, na.rm = TRUE)
+    is_paired <- isTRUE(object_params$is_paired)
     cat("FDEResult\n")
-    cat("  Genes tested   :", nrow(object@deTable), "\n")
-    cat("  Samples        :", ncol(object@pseudobulk), "\n")
+    cat("  Genes tested   :", nrow(dt), "\n")
+    cat("  Samples        :", ncol(pb), "\n")
     cat("  Significant    :", sig, "(adj.P.Val < 0.05)\n")
-    if (!is.null(object@params$cell_type))
-        cat("  Cell type      :", object@params$cell_type, "\n")
-    if (!is.null(object@params$condition))
-        cat("  Condition      :", object@params$condition, "\n")
+    if (!is.null(object_params$cell_type))
+        cat("  Cell type      :", object_params$cell_type, "\n")
+    if (!is.null(object_params$condition))
+        cat("  Condition      :", object_params$condition, "\n")
     cat("  Design         :", if (is_paired) "paired" else "unpaired",
         "\n")
     invisible(object)
@@ -177,3 +183,32 @@ setMethod("pseudobulk", "FDEResult", function(x, ...) x@pseudobulk)
 #' @rdname donorWeights
 #' @export
 setMethod("donorWeights", "FDEResult", function(x, ...) x@donorWeights)
+
+#' @title Accessor for analysis parameters in a FDEResult
+#'
+#' @description Returns the analysis parameter list from a
+#'   \code{FDEResult} object.
+#'
+#' @param x A \code{FDEResult} object.
+#' @param ... Additional arguments (not used).
+#'
+#' @return A \code{list} of analysis parameters.
+#'
+#' @examples
+#' library(S4Vectors)
+#' de <- DataFrame(logFC = c(1.2, -0.5), P.Value = c(0.001, 0.5),
+#'                 adj.P.Val = c(0.01, 0.8))
+#' pb <- matrix(rpois(20, 10), nrow = 2, ncol = 10)
+#' rownames(pb) <- paste0("Gene", 1:2)
+#' colnames(pb) <- paste0("Donor", 1:10)
+#' obj <- FDEResult(
+#'     de,
+#'     pb,
+#'     setNames(sqrt(1:10), paste0("Donor", 1:10)),
+#'     params = list(cell_type = "T_cells", condition = "group")
+#' )
+#' params(obj)
+#'
+#' @importFrom S4Vectors params
+#' @export
+setMethod("params", "FDEResult", function(x, ...) x@params)

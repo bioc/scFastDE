@@ -62,7 +62,6 @@ plotDEResults <- function(result,
 
     dt <- as.data.frame(deTable(result))
 
-    # Significance classification
     dt$sig <- "ns"
     dt$sig[dt$adj.P.Val < fdr_thresh & dt$logFC >  lfc_thresh] <- "up"
     dt$sig[dt$adj.P.Val < fdr_thresh & dt$logFC < -lfc_thresh] <- "down"
@@ -70,9 +69,10 @@ plotDEResults <- function(result,
 
     dt$neg_log10_p <- -log10(dt$P.Value + 1e-300)
 
+    result_params <- params(result)
     # Top genes to label
-    sig_genes <- dt[dt$sig != "ns", ]
-    sig_genes <- sig_genes[order(sig_genes$adj.P.Val), ]
+    sig_genes <- dt[dt$sig != "ns", , drop = FALSE]
+    sig_genes <- sig_genes[order(sig_genes$adj.P.Val), , drop = FALSE]
     label_genes <- head(sig_genes, top_n)
 
     p <- ggplot(dt, aes(x = .data[["logFC"]],
@@ -97,8 +97,8 @@ plotDEResults <- function(result,
             x      = expression(log[2]~"fold change"),
             y      = expression(-log[10]~"p-value"),
             colour = "Regulation",
-            title  = paste0("DE: ", result@params$cell_type,
-                            " | ", result@params$contrast)
+            title  = paste0("DE: ", result_params$cell_type,
+                            " | ", result_params$contrast)
         ) +
         theme_bw(base_size = 11) +
         theme(

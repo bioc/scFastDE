@@ -113,12 +113,9 @@ fastDE <- function(sce,
                     min_cells   = 10L,
                     BPPARAM     = SerialParam()) {
     # ── Validation ────────────────────────────────────────────────────────────
-    if (!is(sce, "SingleCellExperiment"))
-        stop("'sce' must be a SingleCellExperiment object.")
-    for (col in c(donor, cell_type, condition)) {
-        if (is.null(col) || !col %in% names(colData(sce)))
-            stop("Column '", col, "' not found in colData(sce).")
-    }
+    .validate_sce_coldata(sce, list(donor     = donor,
+                                    cell_type = cell_type,
+                                    condition = condition))
     if (is.null(target_type))
         stop("'target_type' must be specified.")
 
